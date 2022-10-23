@@ -1,16 +1,24 @@
 #!/usr/bin/env python3
+"""
+Say hello
+"""
 from argparse import ArgumentParser, Namespace
 
+
 def get_args() -> Namespace:
+    """Get the command-line arguments"""
+
     parser: ArgumentParser = ArgumentParser(description='Say hello')
 
-    # parser.add_argument('name', help='Name to greet')         # 1. positioinal argument
-    parser.add_argument('-n', '--name', metavar='name', default='World',
-                        help='name to greet')   # 2. optional argument
+    # parser.add_argument('name', help='Name to greet') # 1. positional argument
+    parser.add_argument('-n', '--name', metavar='name', default='World', help='name to greet')   # 2. optional argument
 
     return parser.parse_args()
 
+
 def main():
+    """main"""
+
     args: Namespace = get_args()
 
     # print(f'args: {args}') # Namespace(name='horse')
