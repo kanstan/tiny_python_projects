@@ -3,6 +3,7 @@
 
 import os
 from subprocess import getstatusoutput, getoutput
+from crowsnest import select_article_for_word  # type: ignore
 
 prg = './crowsnest.py'
 consonant_words = [
@@ -66,3 +67,12 @@ def test_vowel_upper():
     for word in vowel_words:
         out = getoutput(f'{prg} {word.upper()}')
         assert out.strip() == template.format('an', word.upper())
+
+
+def test_select_article_for_word() -> None:
+    """select_article_for_word should return correct article for a word"""
+
+    assert select_article_for_word('iceberg') == 'an'
+    assert select_article_for_word('Iceberg') == 'an'
+    assert select_article_for_word('narwhal') == 'a'
+    assert select_article_for_word('Narwhal') == 'a'  

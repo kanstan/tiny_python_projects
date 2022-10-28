@@ -10,14 +10,14 @@ def get_args() -> Namespace:
 
     parser: ArgumentParser = ArgumentParser(description='Say hello')
 
-    # parser.add_argument('name', help='Name to greet') # 1. positional argument
+    # parser.add_argument('name', metavar='name', help='Name to greet') # 1. positional argument 
+    # ('name' - property to access in code, metavar='name' - will be shown in help (if metavar empty - property will be used instead))
     parser.add_argument('-n', '--name', metavar='name', default='World', help='name to greet')   # 2. optional argument
 
     return parser.parse_args()
 
 
 def main():
-    """main"""
 
     args: Namespace = get_args()
 
