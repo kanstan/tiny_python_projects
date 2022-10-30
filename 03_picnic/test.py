@@ -4,6 +4,8 @@
 import os
 from subprocess import getoutput
 
+from picnic import format_list
+
 prg = './picnic.py'
 
 
@@ -45,8 +47,7 @@ def test_more_than_two():
 
     arg = '"potato chips" coleslaw cupcakes "French silk pie"'
     out = getoutput(f'{prg} {arg}')
-    expected = ('You are bringing potato chips, coleslaw, '
-                'cupcakes, and French silk pie.')
+    expected = ('You are bringing potato chips, coleslaw, cupcakes, and French silk pie.')
     assert out.strip() == expected
 
 
@@ -66,3 +67,10 @@ def test_more_than_two_sorted():
     out = getoutput(f'{prg} {arg} --sorted')
     expected = ('You are bringing apples, bananas, cherries, and dates.')
     assert out.strip() == expected
+
+
+def test_format_list() -> None:
+    assert format_list([]) == ""
+    assert format_list(["one"]) == "one"
+    assert format_list(["one", "two"]) == "one and two"
+    assert format_list(["one", "two", "three", "four"]) == "one, two, three, and four"
